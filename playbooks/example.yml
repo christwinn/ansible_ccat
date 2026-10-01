@@ -1,6 +1,7 @@
 ---
 - name:  My Example File
   hosts: all
+  gather_facts: no
   tasks: 
     - name: This is Task 1
       debug:
@@ -10,6 +11,7 @@
         msg: This is message two
 - name:  This is the 2nd Play!
   hosts: localhost
+  gather_facts: no
   tasks:
     - name: This is Task 2
       debug:
