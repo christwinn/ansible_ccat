@@ -4,15 +4,32 @@
   tasks: 
   - name: Install Package
     ansible.builtin.dnf: 
-      name:  httpd
-      state: latest
+      name:      httpd
+      state:     latest
 
   - name: Enable and Start httpd
     ansible.builtin.service:
-      name:    httpd
-      state:   started
-      enabled: yes
+      name:      httpd
+      state:     started
+      enabled:   yes
 
+- name:  install and enable and start apache2 service
+  hosts: ubuntu 
+  tasks: 
+  - name: Install Package
+    apt: 
+      name:      apache2
+      state:     latest
+
+  - name: Enable and Start httpd(apache2)
+    service:
+      name:      apache2
+      state:     started
+      enabled:   yes
+
+- name: Configure remote access to the webservers
+  hosts: webservers
+  tasks: 
   - name: Allow http access
     ansible.posix.firewalld:
       service:   http
@@ -23,19 +40,6 @@
 
   - name: Create index.html
     ansible.builtin.copy:
-      content: "hello world"
-      dest:    "/var/www/html/index.html"
+      content:   "hello world"
+      dest:      "/var/www/html/index.html"
 
-- name:  install and enable and start apache2 service
-  hosts: ubuntu 
-  tasks: 
-  - name: Install Package
-    apt: 
-      name:  apache2
-      state: latest
-
-  - name: Enable and Start httpd(apache2)
-    service:
-      name:    apache2
-      state:   started
-      enabled: yes
