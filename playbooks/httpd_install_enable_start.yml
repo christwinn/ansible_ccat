@@ -13,11 +13,19 @@
       state:     started
       enabled:   yes
 
+  - name: Allow http access
+    ansible.posix.firewalld:
+      service:   http
+      permanent: true   # as we know permanent does not apply to the running state
+      immediate: true   # so immediate must be set to update the running firewall akin to firewall-cmd --reload.
+      state:     enabled
+      zone:      public # apply to the default zone
+
 - name:  install and enable and start apache2 service
   hosts: ubuntu 
   tasks: 
   - name: Install Package
-    apt: 
+    ansible.builtin.apt: 
       name:      apache2
       state:     latest
 
@@ -27,17 +35,22 @@
       state:     started
       enabled:   yes
 
-- name: Configure remote access to the webservers
+  - name: Check UFW
+    ansible.builtin.apt:
+      name:      ufw
+      state:     present
+
+  - name: Allow http access
+    community.general.ufw:
+      rule:      allow
+      name:      http
+
+  - name: Apply ufw
+    ansible.builtin.command: ufw reload
+
+- name: Set index.html
   hosts: webservers
   tasks: 
-  - name: Allow http access
-    ansible.posix.firewalld:
-      service:   http
-      permanent: true   # as we know permanent does not apply to the running state
-      immediate: true   # so immediate must be set to update the running firewall akin to firewall-cmd --reload.
-      state:     enabled
-      zone:      public # apply to the default zone
-
   - name: Create index.html
     ansible.builtin.copy:
       content:   "hello world"
