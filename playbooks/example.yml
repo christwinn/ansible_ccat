@@ -1,0 +1,16 @@
+---
+- name:  My Example File
+  hosts: all
+  tasks: 
+    - name: This is Task 1
+      debug:
+        msg: This is message one
+    - name: This is Task 2
+      debug:
+        msg: This is message two
+- name:  This is the 2nd Play!
+  hosts: localhost
+  tasks:
+    - name: This is Task 2
+      debug:
+        msg: This is message three!
