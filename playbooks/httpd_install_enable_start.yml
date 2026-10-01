@@ -3,14 +3,25 @@
   hosts: redhat
   tasks: 
   - name: Install Package
-    yum: 
+    ansible.builtin.dnf: 
       name:  httpd
       state: latest
   - name: Enable and Start httpd
-    service:
+    ansible.builtin.service:
       name:    httpd
       state:   started
       enabled: yes
+  - name: Allow Port 80 access
+    ansible.posix.firewalld:
+      service:   http
+      permanent: true
+      state:     enabled
+      zone:      public
+  - name: Create index.html
+    ansible.builtin.copy:
+      content: "hello world"
+      dest:    "/var/www/html/index.html"
+
 - name:  install and enable and start apache2 service
   hosts: ubuntu 
   tasks: 
