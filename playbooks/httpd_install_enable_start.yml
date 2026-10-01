@@ -57,3 +57,9 @@
       content:   "hello world"
       dest:      "/var/www/html/index.html"
 
+- name: Validate with a curl
+  hosts: localhost
+  tasks:
+  - name: Curl node1
+    ansible.builtin.command:
+      cmd: curl --silent node1
