@@ -1,6 +1,6 @@
 ---
 - name:  install and enable and start httpd service
-  hosts: all
+  hosts: redhat
   tasks: 
   - name: Install Package
     yum: 
@@ -11,3 +11,17 @@
       name:    httpd
       state:   started
       enabled: yes
+---
+- name:  install and enable and start apache2 service
+  hosts: ubuntu 
+  tasks: 
+  - name: Install Package
+    apt: 
+      name:  apache2
+      state: latest
+  - name: Enable and Start httpd(apache2)
+    service:
+      name:    apache2
+      state:   started
+      enabled: yes
+---
