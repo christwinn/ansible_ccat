@@ -11,7 +11,6 @@
       name:    httpd
       state:   started
       enabled: yes
----
 - name:  install and enable and start apache2 service
   hosts: ubuntu 
   tasks: 
@@ -24,4 +23,3 @@
       name:    apache2
       state:   started
       enabled: yes
----
