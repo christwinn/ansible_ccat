@@ -6,17 +6,21 @@
     ansible.builtin.dnf: 
       name:  httpd
       state: latest
+
   - name: Enable and Start httpd
     ansible.builtin.service:
       name:    httpd
       state:   started
       enabled: yes
-  - name: Allow Port 80 access
+
+  - name: Allow http access
     ansible.posix.firewalld:
       service:   http
-      permanent: true
+      permanent: true   # as we know permanent does not apply to the running state
+      immediate: true   # so immediate must be set to update the running firewall akin to firewall-cmd --reload.
       state:     enabled
-      zone:      public
+      zone:      public # apply to the default zone
+
   - name: Create index.html
     ansible.builtin.copy:
       content: "hello world"
@@ -29,6 +33,7 @@
     apt: 
       name:  apache2
       state: latest
+
   - name: Enable and Start httpd(apache2)
     service:
       name:    apache2
