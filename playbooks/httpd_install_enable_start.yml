@@ -43,7 +43,7 @@
   - name: Allow http access
     community.general.ufw:
       rule:      allow
-      name:      http
+      name:      apache2
 
   - name: Apply ufw
     ansible.builtin.command: ufw reload
