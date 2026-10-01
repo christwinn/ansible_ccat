@@ -1,6 +1,6 @@
 ---
-- name:         SELinux setenforce
-  hosts:        localhost
+- name:         SELinux setenforce, limit to RH flavours
+  hosts:        redhat
   gather_facts: no
   become:       yes
   tasks:
