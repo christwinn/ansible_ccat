@@ -1,0 +1,7 @@
+- myusers
+  - usrname:   linda
+    usrgroup:  wheel
+  - usrname:   anna
+    usrgroup:  users
+  - usrname:   lisa
+    usrgroup:  users

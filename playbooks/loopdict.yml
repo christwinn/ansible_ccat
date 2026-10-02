@@ -1,0 +1,10 @@
+---
+- name:  demonstrate loop
+  hosts: localhost
+  vars_files:
+  - var/loopusers
+  tasks:
+  - name: show some loops
+    debug: 
+      msg:  "{{ item.usrname }} is in {{ item.usrgroup }}"
+    loop: "{{ myusers }}"
