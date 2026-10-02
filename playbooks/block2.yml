@@ -6,7 +6,7 @@
     block:
     - name: remove a file
       shell:
-        cmd: rm -f /var/www/html/index.html
+        cmd: rm /var/www/html/index.html
     - name: print status
       debug: 
         msg: block was operated
