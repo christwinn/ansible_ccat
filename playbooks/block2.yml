@@ -1,0 +1,27 @@
+---
+- name:  using blocks
+  hosts: redhat
+  tasks:
+  - name: intended to be a success
+    block:
+    - name: remove a file
+      file:
+        path:  /var/www/html/index.html
+        state: absent
+    - name: print status
+      debug: 
+        msg: block was operated
+
+    rescue:
+    - name: create the index file
+      shell:
+        cmd: echo "hello world" > /var/www/html/index.html
+    - name: printing rescue status
+      debug:
+        msg: rescue was attempted
+
+    always:
+    - name: writing a message
+      debug: 
+        msg: it works
+
