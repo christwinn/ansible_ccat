@@ -1,6 +1,6 @@
 ---
 - name:  demo register
-  hosts: node1
+  hosts: node1.example.com
   tasks:
     - command:  date
       register: thisdate
