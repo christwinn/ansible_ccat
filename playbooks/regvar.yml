@@ -1,0 +1,9 @@
+---
+- name:  demo register
+  hosts: node1
+  tasks:
+    - command:  date
+      register: thisdate
+    - debug:
+        var: thisdate
+
