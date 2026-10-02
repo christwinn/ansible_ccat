@@ -1,0 +1,11 @@
+---
+- name: Create a user
+  gather_facts: no
+  hosts: ubuntu
+  vars_files:
+    - vars/user.yml
+  tasks:
+    - name: create a user {{ username }}
+      user:
+        name:  "{{ username }}"
+        shell: /bin/bash
