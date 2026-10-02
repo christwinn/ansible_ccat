@@ -1,12 +1,12 @@
 ---
 - hosts: redhat
-  var: 
+  vars: 
     package: httpd
 - hosts: ubuntu
-  var:
+  vars:
     package: apache2
 - hosts: all
-  var:
+  vars:
     service: http
 
 - name:  install and enable and start httpd service
