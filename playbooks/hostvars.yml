@@ -1,0 +1,15 @@
+---
+- name: host variables
+  hosts: ubuntu
+  vars:
+    myuser: loki
+    groups: mygroup
+  tasks:
+    - debug: 
+        msg: Inventory hostname {{ inventory_hostname }} is using {{ host_vars }}
+    - name: create group
+      command: groupadd {{ groups }}
+    - name: Create a user that is member of {{ groups }}
+      user: 
+        name:  "{{ myuser }}"
+        groups:"{{ groups }}"
