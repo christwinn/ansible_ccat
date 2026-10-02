@@ -8,12 +8,12 @@
   tasks: 
   - name: Install Package
     ansible.builtin.dnf: 
-      name:      "{{ package_httpd }}"
+      name:      "{{ package_http }}"
       state:     latest
 
   - name: Enable and Start httpd
     ansible.builtin.service:
-      name:      "{{ package_httpd }}"
+      name:      "{{ package_http }}"
       state:     started
       enabled:   yes
 
@@ -49,7 +49,7 @@
       state:     present
 
   - name: Allow http access
-    ansible.builtin.command: ufw status | grep "80/tcp" && ufw allow {{ firewall_service_http }}
+    ansible.builtin.shell: ufw status | grep "80/tcp" && ufw allow {{ firewall_service_http }}
     #community.general.ufw:
     #this causes a fatal error with ansible-navigator and playbook complains that the version is not up to date
       #rule:      allow
