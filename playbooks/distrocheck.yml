@@ -1,0 +1,17 @@
+---
+- name: when demo
+  hosts: all
+  vars: 
+    supported_distros:
+      - almalinux
+      - redhat
+      - centos
+    mypackage: "vim"
+  tasks:
+    - name: install on RedHat family
+      dnf:  
+        name:  "{{ mypackage }}"
+        state: present
+      when: ansible_distribution in supported_distros
+
+
