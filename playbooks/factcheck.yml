@@ -2,7 +2,11 @@
 - name:  check a fact about the date
   hosts: localhost
   tasks: 
-    - name: check the month
+    - name: check october
       debug:
-        msg: echo the month is: OCTOBER!
+        msg: "echo the month is: OCTOBER!"
       when: '"10" in ansible_date_time.month'
+    - name: check september
+      debug:
+        msg: "echo the month is : SEPTEMER!"
+      when: '"9" in ansible_date_time.month'
