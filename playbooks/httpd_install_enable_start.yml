@@ -1,13 +1,9 @@
 ---
-- name: set variables in file not sure this will work
-  hosts: all
-  vars_files:
-    - var/httpd.yml
-
 - name:  install and enable and start httpd service
   hosts: redhat
   vars_files:
     - vars/httpd.yml
+    - vars/httpd_redhat.yml
   tasks: 
   - name: Install Package
     ansible.builtin.dnf: 
@@ -30,6 +26,9 @@
 
 - name:  install and enable and start apache2 service
   hosts: ubuntu 
+  vars_files:
+    - vars/httpd.yml
+    - vars/httpd_ubuntu.yml
   tasks: 
   - name: Install Package
     ansible.builtin.apt: 
@@ -71,7 +70,7 @@
   tasks: 
   - name: Copy index1.html
     ansible.builtin.copy:
-      src:       "index1.html"
+      src:       "files/index1.html"
       dest:      "/var/www/html/index1.html"
 
 - name: Validate with a curl
