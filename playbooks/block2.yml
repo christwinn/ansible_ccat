@@ -5,9 +5,8 @@
   - name: intended to be a success
     block:
     - name: remove a file
-      file:
-        path:  /var/www/html/index.html
-        state: absent
+      shell:
+        cmd: rm -f /var/www/html/index.html
     - name: print status
       debug: 
         msg: block was operated
