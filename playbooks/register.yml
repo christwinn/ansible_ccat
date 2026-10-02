@@ -2,7 +2,7 @@
 - name:  demo register
   hosts: all
   vars: 
-  username: "anna"
+    username: "anna"
   tasks:
     - name: show register on user module
       user: 
