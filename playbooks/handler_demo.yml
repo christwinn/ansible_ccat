@@ -1,0 +1,20 @@
+---
+- name:  handler demo
+  hosts: redhat
+  #force_handlers: true
+  tasks: 
+  - name: copy index.html
+    copy: 
+      src:  files/index1.html
+      dest: /var/www/html/index.html
+    notify:
+    - restart_web
+  - name: fail to copy
+    copy:
+      src:  tmp/not_exists
+      dest: /var/www/html/not_exists.html
+  handlers: 
+  - name: restart_web
+    service:
+      name:  httpd
+      state: restarted
