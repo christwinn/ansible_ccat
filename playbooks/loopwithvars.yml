@@ -1,0 +1,10 @@
+---
+- name:  demonstrate loop
+  hosts: localhost
+  var_files:
+  - vars/loopvars
+  tasks:
+  - name: show some loops
+    debug: 
+      msg:  "{{ item }}"
+    loop: "{{ myvars }}"
