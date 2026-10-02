@@ -41,10 +41,12 @@
       state:     present
 
   - name: Allow http access
-    community.general.ufw:
-      rule:      allow
-      port:      "80"
-      proto:     tcp
+    ansible.builtin.command: ufw allow http
+    #community.general.ufw:
+    #this causes a fatal error with ansible-navigator and playbook complains that the version is not up to date
+      #rule:      allow
+      #port:      "80"
+      #proto:     tcp
 
   - name: Apply ufw
     ansible.builtin.command: ufw reload
