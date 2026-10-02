@@ -1,16 +1,13 @@
 ---
-- hosts: redhat
-  vars: 
-    package: httpd
-- hosts: ubuntu
-  vars:
-    package: apache2
-- hosts: all
-  vars:
-    service: http
+- name: set variables in file not sure this will work
+  hosts: all
+  var_files:
+    - var/httpd.yml
 
 - name:  install and enable and start httpd service
   hosts: redhat
+  var_files:
+    - vars/httpd.yml
   tasks: 
   - name: Install Package
     ansible.builtin.dnf: 

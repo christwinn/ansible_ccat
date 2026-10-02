@@ -1,0 +1,10 @@
+---
+- hosts: redhat
+  vars: 
+    package: httpd
+- hosts: ubuntu
+  vars:
+    package: apache2
+- hosts: all
+  vars:
+    service: http
