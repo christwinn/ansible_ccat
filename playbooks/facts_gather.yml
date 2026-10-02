@@ -1,0 +1,7 @@
+---
+- name: gathering facts
+  hosts: redhat
+  tasks: 
+    - name: show facts
+      debug:
+        var: ansible_facts
