@@ -3,8 +3,8 @@
   hosts: all
   vars: 
     supported_distros:
-      - almalinux
-      - redhat
+      - AlmaLinux
+      - RedHat
       - centos
     mypackage: "vim"
   tasks:
