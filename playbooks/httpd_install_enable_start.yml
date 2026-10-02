@@ -1,25 +1,25 @@
 ---
 - name:  install and enable and start httpd service
   hosts: redhat
-  vars_files:
-    - vars/httpd.yml
-    - vars/httpd_redhat.yml
+    #  vars_files:
+    #- vars/httpd.yml
+    #- vars/httpd_redhat.yml
   gather_facts: no
   tasks: 
   - name: Install Package
     ansible.builtin.dnf: 
-      name:      "{{ package }}"
+      name:      "{{ package_httpd }}"
       state:     latest
 
   - name: Enable and Start httpd
     ansible.builtin.service:
-      name:      "{{ package }}"
+      name:      "{{ package_httpd }}"
       state:     started
       enabled:   yes
 
   - name: Allow http access
     ansible.posix.firewalld:
-      service:   "{{ service }}"
+      service:   "{{ firewall_service_http }}"
       permanent: true   # as we know permanent does not apply to the running state
       immediate: true   # so immediate must be set to update the running firewall akin to firewall-cmd --reload.
       state:     enabled
@@ -27,19 +27,19 @@
 
 - name:  install and enable and start apache2 service
   hosts: ubuntu 
-  vars_files:
-    - vars/httpd.yml
-    - vars/httpd_ubuntu.yml
+    #vars_files:
+    #- vars/httpd.yml
+    #- vars/httpd_ubuntu.yml
   gather_facts: no
   tasks: 
   - name: Install Package
     ansible.builtin.apt: 
-      name:      "{{ package }}"
+      name:      "{{ package_http }}"
       state:     latest
 
   - name: Enable and Start httpd(apache2)
     service:
-      name:      "{{ package }}"
+      name:      "{{ package_http }}"
       state:     started
       enabled:   yes
 
@@ -49,7 +49,7 @@
       state:     present
 
   - name: Allow http access
-    ansible.builtin.command: ufw allow {{ service }}
+    ansible.builtin.command: ufw status | grep "80/tcp" && ufw allow {{ firewall_service_http }}
     #community.general.ufw:
     #this causes a fatal error with ansible-navigator and playbook complains that the version is not up to date
       #rule:      allow
