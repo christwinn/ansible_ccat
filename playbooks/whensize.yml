@@ -8,4 +8,4 @@
       debug:
         msg: "{{ message }}"
       loop: "{{ ansible_mounts }}"
-      when: item.mount == "/boot" and item.size_available > 100000000
+      when: item.mount == "/boot" and item.size_total > 2000000000
