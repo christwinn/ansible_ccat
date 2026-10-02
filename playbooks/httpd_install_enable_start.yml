@@ -1,21 +1,31 @@
 ---
+- hosts: redhat
+  var: 
+    package: httpd
+- hosts: ubuntu
+  var:
+    package: apache2
+- hosts: all
+  var:
+    service: http
+
 - name:  install and enable and start httpd service
   hosts: redhat
   tasks: 
   - name: Install Package
     ansible.builtin.dnf: 
-      name:      httpd
+      name:      "{{ package }}"
       state:     latest
 
   - name: Enable and Start httpd
     ansible.builtin.service:
-      name:      httpd
+      name:      "{{ package }}"
       state:     started
       enabled:   yes
 
   - name: Allow http access
     ansible.posix.firewalld:
-      service:   http
+      service:   "{{ service }}"
       permanent: true   # as we know permanent does not apply to the running state
       immediate: true   # so immediate must be set to update the running firewall akin to firewall-cmd --reload.
       state:     enabled
@@ -26,12 +36,12 @@
   tasks: 
   - name: Install Package
     ansible.builtin.apt: 
-      name:      apache2
+      name:      "{{ package }}"
       state:     latest
 
   - name: Enable and Start httpd(apache2)
     service:
-      name:      apache2
+      name:      "{{ package }}"
       state:     started
       enabled:   yes
 
@@ -41,7 +51,7 @@
       state:     present
 
   - name: Allow http access
-    ansible.builtin.command: ufw allow http
+    ansible.builtin.command: ufw allow {{ service }}
     #community.general.ufw:
     #this causes a fatal error with ansible-navigator and playbook complains that the version is not up to date
       #rule:      allow
@@ -64,7 +74,7 @@
   tasks: 
   - name: Copy index1.html
     ansible.builtin.copy:
-      src:       "/tmp/index1.html"
+      src:       "index1.html"
       dest:      "/var/www/html/index1.html"
 
 - name: Validate with a curl
