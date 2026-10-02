@@ -6,5 +6,5 @@
   tasks:
   - name: show some loops
     debug: 
-      msg:  "{{ item.username }} is in {{ item.group }}"
+      msg:  "{{ item['username'] }} is in {{ item['group'] }}"
     loop: "{{ myusers }}"
