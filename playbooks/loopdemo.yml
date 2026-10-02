@@ -1,0 +1,11 @@
+---
+- name:  demonstrate loop
+  hosts: localhost
+  tasks:
+  - name: show some loops
+    debug: 
+      msg: "{{ item }}"
+    loop:
+    - vsftpd
+    - httpd
+    - sshd
