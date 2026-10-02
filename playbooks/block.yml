@@ -15,4 +15,6 @@
         service:
           name:  httpd
           state: started
-      when: ansible_distribution == "RedHat" or ansible_distribution == "AlmaLinux"
+      #when: ansible_distribution == "RedHat" or ansible_distribution == "AlmaLinux"
+      #and we should let in Rocky 
+      when: ansible_os_family == "RedHat"
