@@ -4,4 +4,9 @@
   tasks:
   - name: show ip address
     debug: 
-    msg: "{{ ansible_facts.hostname }} ( {{ ansible_facts.fqdn }} )  is using {{ ansible_facts.default_ipv4.address }}"
+      msg: "{{ ansible_facts.hostname }} ( {{ ansible_facts.fqdn }} )  is using {{ ansible_facts.default_ipv4.address }}"
+
+  - name: modern notation
+    debug: 
+      msg: "{{ ansible_facts['hostname'] }} ( {{ ansible_facts['fqdn'] }} )  is using {{ ansible_facts['default_ipv4']['address'] }}"
+
