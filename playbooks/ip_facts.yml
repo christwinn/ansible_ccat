@@ -2,6 +2,6 @@
 - name: gather ip addresses
   hosts: all
   tasks:
-    - name: show ip address
-      debug: 
-      msg: "{{ ansible_facts.hostname }} ( {{ ansible_facts.fqdn }} )  is using {{ ansible_facts.default_ipv4.address }}"
+  - name: show ip address
+    debug: 
+    msg: "{{ ansible_facts.hostname }} ( {{ ansible_facts.fqdn }} )  is using {{ ansible_facts.default_ipv4.address }}"
