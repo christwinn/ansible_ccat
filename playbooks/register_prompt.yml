@@ -1,0 +1,18 @@
+---
+- name:  demo register
+  hosts: all
+  vars_prompt: 
+    - name:    username
+      prompt:  "Who are we looking for?"
+      private: no
+  tasks:
+  - shell:    cat /etc/passwd
+    register: passwd_contents
+
+  - debug: 
+      var: passwd_contents
+
+  - name:  does user exist?
+    debug:
+      msg: echo "passwd contains {{ username }}"
+    when:  passwd.contents.stdout.find(username) != -1
