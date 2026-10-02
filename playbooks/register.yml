@@ -7,7 +7,7 @@
   - name: show register on user module
     user: 
       name: "{{ username }}"
-    regsiter: user
+    register: user
   - name: show registered result
     debug:
       var: user
