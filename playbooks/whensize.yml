@@ -1,0 +1,11 @@
+---
+- name:  check the boot size
+  hosts: all
+  vars:
+    message: "Boot is Large"
+  tasks:
+    - name:
+      debug:
+        msg: "{{ message }}"
+      loop: "{{ ansible_mounts }}"
+      when: item.mount == "/boot" and item.size_available > 100000000
