@@ -8,6 +8,8 @@
       - centos
     mypackage: "vim"
   tasks:
+    - debug:
+        msg: "Dist is : {{ ansible_distribution }}"
     - name: install on RedHat family
       dnf:  
         name:  "{{ mypackage }}"
