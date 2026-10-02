@@ -4,10 +4,10 @@
   vars: 
     username: "anna"
   tasks:
-    - name: show register on user module
-      user: 
-        name: "{{ username }}"
-      regsiter: user
-    - name: show registered result
-      debug:
-        var: user
+  - name: show register on user module
+    user: 
+      name: "{{ username }}"
+    regsiter: user
+  - name: show registered result
+    debug:
+      var: user
