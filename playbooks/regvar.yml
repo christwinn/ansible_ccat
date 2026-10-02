@@ -6,4 +6,8 @@
       register: thisdate
     - debug:
         var: thisdate
+    - debug:
+        var: thisdate.stdout
+    - debug:
+        var: thisdate['stdout']
 
