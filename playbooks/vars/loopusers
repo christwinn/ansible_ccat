@@ -1,8 +1,6 @@
-myusers:
-  - usrname:   linda
-    usrgroup:  wheel
-  - usrname:   anna
-    usrgroup:  users
-  - usrname:   lisa
-    usrgroup:  users
+myusers: [
+  { "username": "linda", "group": "wheel" },
+  { "username": "anna",  "group": "users" },
+  { "username": "lisa",  "group": "users" }
+]
 
