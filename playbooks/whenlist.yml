@@ -1,0 +1,10 @@
+---
+- name:  check conditions
+  hosts: all
+  tasks: 
+    - name: 
+      debug:
+        msg: "Running RedHat with enough memory" 
+      when:  
+        - ansible_distribution == "RedHat"
+        - ansible_memfree_mb > 1000
