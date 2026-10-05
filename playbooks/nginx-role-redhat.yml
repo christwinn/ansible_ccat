@@ -2,10 +2,12 @@
 - name:  use galaxy nginx role
   hosts: redhat
   pre_tasks:
-    - package:
-        name:  apache2
+    - name: remove httpd
+      package:
+        name:  httpd2
         state: absent
-    - package: 
+    - name: update packages
+      package: 
         name:  "*"
         state: latest
   post_tasks:
