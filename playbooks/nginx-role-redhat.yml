@@ -8,7 +8,8 @@
     - package: 
         name:  "*"
         state: latest
+  post_tasks:
+    - name: clean dnf
+      command: dnf clean
   roles:
     - role: geerlingguy.nginx
-  - name: clean dnf
-    command: dnf clean
