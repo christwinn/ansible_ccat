@@ -1,0 +1,16 @@
+---
+- name:  configure vsftpd using jinga template
+  hosts: redhat
+  vars: 
+    anonymous_enable:   yes
+    local_enable:       yes
+    write_enable:       yes
+    anon_upload_enable: yes
+  tasks: 
+  - name: install vsftpd
+    dnf:
+      name: vsftpd
+  - name: use template to copy config
+    template: 
+      src:  vsftpd.j2
+      dest: /etc/vsftpd/vsftpd.conf
