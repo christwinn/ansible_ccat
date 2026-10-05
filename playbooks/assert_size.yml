@@ -2,14 +2,15 @@
 - name:  Assert Size
   hosts: localhost
   vars_prompt: 
-  - name:   filesize
-    prompt: "Specify a filesize in megabytes"
+  - name:    filesize
+    prompt:  "Specify a filesize in megabytes"
+    private: no
   tasks: 
   - name: check if a filesize is valid
     assert:
       that: 
-      - filesize <= 100
-      - filesize >= 1
+      - "{{ (filesize | int) <= 100 }}"
+      - "{{ (filesize | int) >= 1 }}"
       fail_msg:    "File Size MUST be between 1 and 100"
       success_msg: "File size is good, continuing"
   - name:    Create a file!
