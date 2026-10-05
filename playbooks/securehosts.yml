@@ -1,0 +1,10 @@
+---
+- name:  modify sudoers
+  hosts: node1.example.com
+  tasks: 
+    - name: modify sudoers
+      lineinfile:
+        src: /etc/sudoers
+        regexp: '^Defaults'
+        line: 'Defaults timestamp_type=global,timestamp_timeout=60'
+        validate: /usr/bin/visudo -cf %s
