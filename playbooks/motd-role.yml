@@ -1,5 +1,7 @@
 ---
 - name: motd role demo
   hosts: all
+  vars: 
+  ansible_manager: alice
   roles: 
     - motd
