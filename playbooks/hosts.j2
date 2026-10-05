@@ -1,9 +1,9 @@
-{% for hosts in groups['all'] %}
+{% for host in groups['all'] %}
   {{ hostvars[host]['ansible_ens160']['ipv4']['address'] }}
 {% endfor %}
-{% for hosts in groups['all'] %}
+{% for host in groups['all'] %}
   {{ hostvars[host]['ansible_hostname'] }}
 {% endfor %}
-{% for hosts in groups['all'] %}
+{% for host in groups['all'] %}
   {{ hostvars[host]['ansible_fqdn'] }}
 {% endfor %}
