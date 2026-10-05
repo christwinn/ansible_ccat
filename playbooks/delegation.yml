@@ -1,0 +1,23 @@
+---
+- name:  install and start httpd
+  hosts: redhat
+  gather_facts: no
+  tasks: 
+  - name: remove package
+    dnf: 
+      name:  nginx
+      state: absent
+  - name: install package
+    dnf: 
+      name:  httpd
+      state: latest
+  - name: start service
+    service:
+      name:    httpd
+      state:   started
+      enabled: true
+  - name: test httpd
+    uri: 
+      url: http://node1.example.com
+    delegate_to: localhost
+
