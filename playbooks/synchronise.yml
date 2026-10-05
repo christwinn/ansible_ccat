@@ -1,0 +1,14 @@
+---
+- name:    copy many files
+  hosts:   all
+  become : true
+  gather_facts: no
+  tasks: 
+  - name: check rsync
+    package:
+      name:  rsync
+      state: latest
+  - name: synchronise files
+    synchronize:
+      src: webfiles/
+      dest: /var/www/html
