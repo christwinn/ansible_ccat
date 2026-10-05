@@ -1,7 +1,7 @@
 ---
 - name:  sample assert stat
   hosts: localhost
-  task:  
+  tasks:  
   - name: stat a directory
     stat: 
       path:   /etc/hosts
