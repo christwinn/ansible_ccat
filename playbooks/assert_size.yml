@@ -1,5 +1,6 @@
 ---
-- name: assert size
+- name:  Assert Size
+  hosts: localhost
   vars_prompt: 
   - name:   filesize
     prompt: "Specify a filesize in megabytes"
