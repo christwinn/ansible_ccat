@@ -9,8 +9,8 @@
   - name: check if a filesize is valid
     assert:
       that: 
-      - "{{ (filesize | int) <= 100 }}"
-      - "{{ (filesize | int) >= 1 }}"
+      - (filesize | int) <= 100
+      - (filesize | int) >= 1
       fail_msg:    "File Size MUST be between 1 and 100"
       success_msg: "File size is good, continuing"
   - name:    Create a file!
