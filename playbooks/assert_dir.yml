@@ -5,7 +5,7 @@
   - name: stat a directory
     stat: 
       path:   /etc/hosts
-    regsiter: sta
+    register: sta
   - name: assert that /etc/ is a directoy
     assert: 
       that: sta.stat.isdir
