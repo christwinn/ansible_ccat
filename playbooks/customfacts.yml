@@ -1,0 +1,23 @@
+---
+- hosts: redhat
+  gather_facts: no
+  tasks: 
+    - name: Custom Fact!
+      blockinfile: 
+        path:   /etc/ansible/facts.d/local.fact
+        create: true 
+        block: |
+          [localfacts]
+          type: production
+- hosts: ubuntu
+  gather_facts: no
+  tasks: 
+    - name: Custom Fact!
+      blockinfile: 
+        path:   /etc/ansible/facts.d/local.fact
+        create: true 
+        block: |
+          [localfacts]
+          type: testing
+
+
