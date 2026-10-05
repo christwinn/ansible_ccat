@@ -1,0 +1,12 @@
+---
+- name:  fail module demo
+  hosts: localhost
+  ignore_errors: yes
+  tasks: 
+  - name:     run something
+    command:  echo hello world
+    register: command_result
+  - name:  report failure
+    fail: 
+      msg: the command has failed
+    when:  "'world' in command_result.stdout"
