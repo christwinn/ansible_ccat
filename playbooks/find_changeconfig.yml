@@ -9,7 +9,7 @@
       paths:    /home/ansible/rhce8-live
       patterns: 'ansible.cfg'
       recurse:  yes
-    regsiter: output
+    register: output
   - name: debug outout
     debug:
       var: item.path
