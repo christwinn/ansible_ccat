@@ -1,5 +1,9 @@
 ---
 - name:  use galaxy nginx role
   hosts: ubuntu
+  pre-tasks:
+    - package:
+        name: httpd
+        state: absent
   roles:
     - role: geerlingguy.nginx
