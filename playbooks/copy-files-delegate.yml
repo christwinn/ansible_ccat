@@ -1,16 +1,16 @@
 ---
 - name:  copy files between hosts
-  hosts: node1.example.com
+  hosts: node2.example.com
   tasks: 
   - name: copy file from node1 to node2
     copy:
       src:  /etc/hosts
       dest: /tmp/node2.hosts
-    delegate_to: node2.example.com
+    delegate_to: node1.example.com
   - name: check file
     stat: 
       path: /tmp/node2.hosts
-    delegate_to: node2.example.com
+    #delegate_to: node2.example.com
     register: statfile
   - debug:
       var:  statfile
