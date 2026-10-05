@@ -1,4 +1,10 @@
 ---
+- hosts: all
+  gather_facts: no
+  tasks:
+    - file: 
+        path:  /etc/ansible/facts.d
+        state: directory
 - hosts: redhat
   gather_facts: no
   tasks: 
