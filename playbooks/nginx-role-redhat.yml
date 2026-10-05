@@ -12,6 +12,6 @@
         state: latest
   post_tasks:
     - name: clean dnf
-      command: dnf clean
+      command: dnf clean packages
   roles:
     - role: geerlingguy.nginx
