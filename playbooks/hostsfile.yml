@@ -4,5 +4,5 @@
   tasks: 
   - template:
       src:  hosts.j2
-      dest: /tmp/hosts
+      dest: /etc/hosts
 
