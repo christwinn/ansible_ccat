@@ -2,7 +2,7 @@
 - name:    copy many files
   hosts:   all
   become : true
-  gather_facts: no
+  #  gather_facts: no
   tasks: 
   - name: check rsync
     package:
