@@ -22,6 +22,6 @@
         msg: "Checksum of /tmp/hosts is {{ result.stat.checksum }}"
     - name: fetch file
       fetch: 
-        src:  /tmp/hosts/
+        src:  /tmp/hosts
         dest: /tmp/
 
