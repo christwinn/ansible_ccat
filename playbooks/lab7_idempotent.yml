@@ -1,0 +1,41 @@
+---
+- name:  Lab to idemptoently create a user with the command module
+  hosts: localhost
+  vars_prompt: 
+    - name:    username
+      prompt:  "Enter a username"
+      private: no
+        #  ignore_errors:  yes
+  force_handlers: true
+  # sander just uses useradd for the idempotency! ok
+  # here we check for the user id, if it exists we exit with an error
+  # if the result from the id command is a failure then 
+  # we progress to creating the user.
+  tasks:
+    - name:          get user id
+      command:       id -u {{ username }}
+      register:      command_result
+      ignore_errors:  yes
+    - debug: 
+        msg: "Result: {{ command_result }}"
+          #    - name:  report failure
+          #      fail: 
+          #        msg: User does not exist
+          #      when: "'1' in command_result.rc"
+    - name:  validate userid
+      assert:
+        that:
+        - ( command_result.rc | int == 1 )
+        fail_msg:    "User exists already"
+        success_msg: "User does not exist"
+          #      notify:
+          #        - add_user
+    - debug: 
+         msg: echo {{ command_result.stdout }}
+    - name:    Add the non-existent user
+      command: useradd {{ username }}
+
+        #  handlers:
+        #  - name: add_user
+        #    debug: 
+        #      msg: creating new user
