@@ -10,3 +10,5 @@
     fail: 
       msg: the command has failed
     when:  "'world' in command_result.stdout"
+  - debug: 
+      msg: "Showing This"
