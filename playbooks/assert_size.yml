@@ -1,0 +1,16 @@
+---
+- name: assert size
+  vars_prompt: 
+  - name:   filesize
+    prompt: "Specify a filesize in megabytes"
+  tasks: 
+  - name: check if a filesize is valid
+    assert:
+      that: 
+      - filesize <= 100
+      - filesize >= 1
+    fail_msg:    "File Size MUST be between 1 and 100"
+    success_msg: "File size is good, continuing"
+  - name:    Create a file!
+    command: dd if=/dev/zero of=/bigfile bs=1 count={{ filesize }}
+
