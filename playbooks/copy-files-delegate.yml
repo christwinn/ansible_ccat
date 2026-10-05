@@ -6,11 +6,13 @@
     copy:
       src:  /etc/hosts
       dest: /tmp/node3.hosts
+    #it is sent from node2 to node3.example.com
     delegate_to: node3.example.com
   - name: check file
     stat: 
       path: /tmp/node3.hosts
-    #delegate_to: node2.example.com
+    #without delegate we try to run on hosts
+    delegate_to: node3.example.com
     register: statfile
   - debug:
       var:  statfile
