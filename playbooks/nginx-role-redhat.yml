@@ -4,7 +4,7 @@
   pre_tasks:
     - name: remove httpd
       package:
-        name:  httpd2
+        name:  httpd
         state: absent
     - name: update packages
       package: 
