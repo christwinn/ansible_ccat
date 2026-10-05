@@ -1,0 +1,14 @@
+---
+- name:  use galaxy nginx role
+  hosts: redhat
+  pre_tasks:
+    - package:
+        name:  apache2
+        state: absent
+    - package: 
+        name:  "*"
+        state: latest
+  roles:
+    - role: geerlingguy.nginx
+  - name: clean dnf
+    command: dnf clean
