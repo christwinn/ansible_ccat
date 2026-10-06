@@ -5,5 +5,5 @@
   vars:
     number: 1223456
   tasks: 
-    debug:
-      msg: The number is {{ number | int | my_namespace.my_collection.phone_format }}
+  - debug:
+      msg: The number is {{ number | my_namespace.my_collection.phone_format }}
