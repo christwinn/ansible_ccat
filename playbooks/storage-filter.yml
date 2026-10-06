@@ -1,0 +1,8 @@
+---
+- name:  setup hosts that have an vdb
+  hosts: all
+  tasks: 
+    - name: check if we have a 2nd disk
+      fail: 
+        msg: there is no 2nd disk
+      when: ansible_facts['devices']['vdb'] is not defined
