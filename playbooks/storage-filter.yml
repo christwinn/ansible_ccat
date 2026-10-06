@@ -17,8 +17,16 @@
         vg:  vgfiles
     - name: get vg size and store in a new variable
       set_fact: 
-        vgsize: "{{ ansible_facts['devices']['lvm']['vgs']['vgfiles']['size_g'] | int }}"
+        vgsize: "{{ ansible_facts['lvm']['vgs']['vgfiles']['size_g'] | int }}"
     - name: show the volume size
       debug:
-        var: "{{ vgsize }}"
+        var: "{{ vgsize | int / 3 * 2 }}"
+    -name: set to 2/3
+      set_fact: 
+        volsize: "{{ vgsize | int / 3 * 2 }}g"
+    - name: show the volume size
+      debug:
+        var: "{{ volsize }}"
+    
+
 
