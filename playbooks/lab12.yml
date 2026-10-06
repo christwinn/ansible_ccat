@@ -22,10 +22,13 @@
     - name: Loop the rules
       firewalld:
         service:   "{{ item['name'] }}"
+        # if state is not set then the default is enabled
         state:     "{{ item['state'] | default('enabled') }}"
-        zone:      "{{ item['zone'] }}"
+        # omit zone where not set!
+        zone:      "{{ item['zone'] | default('omit') }}"
         immediate: true
         permanent: true
       loop: "{{ firewall }}"
-      when: "item['zone'] is defined"
+      # only include rules where the zone is defined
+      #when: "item['zone'] is defined"
 
