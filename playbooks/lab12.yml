@@ -12,7 +12,7 @@
       - name:    ssh
         zone:    public
         #state:   
-      - name: smb
+      - name:    smtp
         #zone:   trusted
         state:   enabled
   tasks:
