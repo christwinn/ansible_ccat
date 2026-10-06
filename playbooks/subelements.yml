@@ -10,7 +10,7 @@
             state: present
           - name:  php
             state: present
-      -name: db_server
+      - name: db_server
         applications: 
           - name:  postgresql
             state: present
