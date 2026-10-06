@@ -1,0 +1,25 @@
+---
+- name:  Confusingly the slide is titled Lesson 11 but it is Lesson 12!
+  hosts: localhost
+  vars: 
+    firewall:
+      - name:    http
+        zone:    public
+        state:   enabled
+      - name:    https
+        zone:    private
+        state:   disabled
+      - service: sshd
+        zone:    public
+        state:   disable
+      - service: smb
+        #zone:   private
+        state:   present
+  tasks:
+    - name: Show the firewall rules
+      debug:
+        msg: "Firewall rules {{ firewall }}"
+
+
+
+
