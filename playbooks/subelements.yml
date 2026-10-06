@@ -1,7 +1,7 @@
 ---
 - name:  Configure server with applications
   hosts: localhost
-  gather_facts: no
+  #gather_facts: no we use ansible_facts so if we do not gather then we can not check distribution!
   vars: 
     servers: 
       - name: web_server
