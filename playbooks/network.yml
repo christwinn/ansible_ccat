@@ -1,0 +1,31 @@
+---
+- name:  network testing
+  hosts: all
+  ignore_errors: true
+  vars: 
+    addresses: 
+      1.2.3.4/24
+      10.0.0.0/8
+    netmask: "{{ ansible_default_ipv4['network'] }}/{{ ansible_default_ipv4['netmask'] }}"
+  tasks:
+    - name: print IP Address
+      debug:
+        msg: The IP Address is {{ ansible_facts['default_ipv4'] }}
+
+    - name: is this a valid IP Address
+      debug:
+        msg: "{{ ansible_facts['default_ipv4']['address'] | ipaddr }}"
+
+    - name: agsin but break
+      debug:
+        msg: "{{ ansible_facts['default_ipv4'] | ipaddr }}"
+
+    - name: netmask
+      debug:
+        msg: "{{ netmask | ipaddr('netmask') }}"
+    - name: use net to convert to cidr notation
+      debug:
+        msg: "{{ netmask | ipaddr('net') }}"
+
+
+
