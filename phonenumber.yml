@@ -3,7 +3,7 @@
   hosts: localhost
   gather_facts: no
   vars:
-    number: 1223456
+    number: "1223456789"
   tasks: 
   - debug:
       msg: The number is {{ number | my_namespace.my_collection.phone_format }}
