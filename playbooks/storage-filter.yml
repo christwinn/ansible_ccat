@@ -6,3 +6,19 @@
       fail: 
         msg: there is no 2nd disk
       when: ansible_facts['devices']['vdb'] is not defined
+    - name: create a partition
+      parted: 
+        device: /dev/vdb
+        number: 1
+        state:  present
+    - name: create a logical volume group
+      lvg: 
+        pvs: /dev/vdb1
+        vg:  vgfiles
+    - name: get vg size and store in a new variable
+      set_fact: 
+        vgsize: "{{ ansible_facts['devices']['lvm']['vgs']['vgfiles']['size_g'] | int }}"
+    - name: show the volume size
+      debug:
+        var: "{{ vgsize }}"
+
