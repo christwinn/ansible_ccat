@@ -1,0 +1,34 @@
+---
+- name:  Showing Map
+  hosts: redhat
+  gather_facts: no
+  ignore_errors: yes
+  vars: 
+  basedir: /var/www/html
+  tasks:
+    - name: Install httpd
+      dnf: 
+        name:  httpd
+        state: latest
+    - name: Show files in basedir
+      find: 
+        path:    "{{ basedir }}"
+        recurse: yes
+      register:  basedir_files
+    - name: Print variable contents
+      debug: 
+        var: basedir_files
+
+    - name: Show files based on map attribute with list
+      set_fact: 
+        webfileslist: "{{ basedir_files['files'] | map(attribute='path') | list }}"
+    - name: Show webfileslist
+      debug: 
+        var: webfileslist
+
+    - name: Now we know the list filter is mandatory, show relative filename
+      set_fact: 
+        webfilesrel: "{{ webfileslist | map('relpath', basedir) | list }}"
+    - name: Show webfilesrel
+      debug: 
+        var: webfilesrel
