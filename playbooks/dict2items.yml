@@ -1,0 +1,25 @@
+---
+- name:  Demonstrate dict2items filter
+  hosts: localhost
+  gather_facts: no
+  vars: #Define a dictionary, which is un-loopable!
+    my_dict:
+      name:       anna
+      age:        25
+      city:       New York
+      occupation: Engineer
+  tasks:
+    - name: Show the original dictionary
+      debug: 
+        msg: "Orignally: {{ my_dict }}"
+    - name: Convert dictionary to a list of items
+      set_fact:
+        my_dict_items: "{{ my_dict | dict2items }}"
+    - name: Show the list of items
+      debug: 
+        msg: "List of items is: {{ my_dict_items }}"
+    - name: "Iterate over the 'dictionary'"
+      debug: 
+        msg: "Key {{ item.key }} -> Value: {{ item.value }}"
+      loop: "{{ my_dict_items }}"
+      
