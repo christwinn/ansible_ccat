@@ -39,4 +39,10 @@
     - name: "Display 'user' Users"
       debug:
         msg: "Active Users: {{ user_users }}"
+
+    - name: "Display 'user' Users"
+      debug:
+        msg: "Active Users: {{ item.name }} "
+      loop: {{ user_users }}
+
     
