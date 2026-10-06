@@ -1,0 +1,42 @@
+---
+- name:  Select the users based on attributes with selectattr
+  hosts: localhost
+  vars:
+    users:
+      - name:   alice
+        active: true
+        role:   admin
+      - name:   bob
+        active: false
+        role:   user
+      - name:   caroline
+        active: true
+        role:   user
+      - name:   diana
+        active: false
+        role:   guest
+  tasks:
+    - name: Show All Users
+      debug:
+        msg: "User list: {{ users }}"
+    - name: Get Active Users
+      set_fact:
+        active_users: "{{ users | selectattr('active', 'equalto', true) | list }}"
+    - name: Display Active Users
+      debug:
+        msg: "Active Users: {{ active_users }}"
+    
+    - name: Get InActive Users
+      set_fact:
+        inactive_users: "{{ users | selectattr('active', 'equalto', false) | list }}"
+    - name: Display InActive Users
+      debug:
+        msg: "InActive Users: {{ inactive_users }}"
+    
+    - name: Get 'user' Users
+      set_fact:
+        user_users: "{{ users | selectattr('role', 'equalto', 'user') | list }}"
+    - name: "Display 'user' Users"
+      debug:
+        msg: "Active Users: {{ user_users }}"
+    
