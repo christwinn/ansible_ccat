@@ -1,25 +1,31 @@
 ---
 - name:  Confusingly the slide is titled Lesson 11 but it is Lesson 12!
-  hosts: localhost
-  vars: 
+  hosts: node1.example.com
+  vars:
     firewall:
       - name:    http
         zone:    public
         state:   enabled
       - name:    https
-        zone:    private
+        zone:    external
         state:   disabled
-      - service: sshd
+      - name:    ssh
         zone:    public
-        state:   disable
-      - service: smb
-        #zone:   private
+        #state:   
+      - name: smb
+        #zone:   trusted
         state:   present
   tasks:
     - name: Show the firewall rules
       debug:
         msg: "Firewall rules {{ firewall }}"
-
-
-
+    - name: Loop the rules
+      firewalld:
+        service:   "{{ item['name'] }}"
+        state:     "{{ item['state'] | default('enabled') }}"
+        zone:      "{{ item['zone'] }}"
+        immediate: true
+        permanent: true
+      loop: "{{ firewall }}"
+      when: "item['zone'] is defined"
 
