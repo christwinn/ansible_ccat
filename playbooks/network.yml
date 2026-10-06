@@ -43,5 +43,5 @@
 
     - name:  Find usable IP in range
       debug:
-        msg: "{{ '193.179.99.8/27 | ipaddr('range_usable') }}"
+        msg: "{{ '193.179.99.8/27' | ipaddr('range_usable') }}"
 
