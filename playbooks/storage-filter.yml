@@ -27,6 +27,15 @@
     - name: show the volume size
       debug:
         var: "{{ volsize }}"
-    
+    - name: create big vol 
+      lvol: 
+        vg:   vgfiles
+        lv:   bigvolume
+        size: "{{ volsize }}"
+    - name: create small vol
+      lvol:
+        vg: vgfiles
+        lv: smallvolume
+        size: "{{ vgsize | int / 3}}g"
 
 
