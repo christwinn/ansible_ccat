@@ -30,5 +30,5 @@
         permanent: true
       loop: "{{ firewall }}"
       # only include rules where the zone is defined
-      when: "item['zone'] is defined"
+      #when: "item['zone'] is defined"
 
