@@ -14,7 +14,7 @@
         #state:   
       - name: smb
         #zone:   trusted
-        state:   present
+        state:   enabled
   tasks:
     - name: Show the firewall rules
       debug:
