@@ -21,7 +21,7 @@
     - name: show the volume size
       debug:
         var: "{{ vgsize | int / 3 * 2 }}"
-    -name: set to 2/3
+    - name: set to 2/3
       set_fact: 
         volsize: "{{ vgsize | int / 3 * 2 }}g"
     - name: show the volume size
