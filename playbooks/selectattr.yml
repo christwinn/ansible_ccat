@@ -42,7 +42,7 @@
 
     - name: "Display 'user' Users"
       debug:
-        msg: "Active Users: {{ item.name }} "
-      loop: {{ user_users }}
+        msg: "Active Users{name}: {{ item.name }} "
+      loop: "{{ user_users }}"
 
     
