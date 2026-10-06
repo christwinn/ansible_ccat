@@ -8,24 +8,40 @@
       10.0.0.0/8
     netmask: "{{ ansible_default_ipv4['network'] }}/{{ ansible_default_ipv4['netmask'] }}"
   tasks:
-    - name: print IP Address
+    - name:  Print IP Address
       debug:
         msg: The IP Address is {{ ansible_facts['default_ipv4'] }}
 
-    - name: is this a valid IP Address
+    - name:  Is this a valid IP Address
       debug:
         msg: "{{ ansible_facts['default_ipv4']['address'] | ipaddr }}"
 
-    - name: agsin but break
+    - name:  Agsin but break
       debug:
         msg: "{{ ansible_facts['default_ipv4'] | ipaddr }}"
 
-    - name: netmask
+    - name:  Available space in specified network
+      debug:
+        msg: "{{ ansible_facts['default_ipv4']['network'] | ipaddr('size') }}"
+
+    - name:  Netmask
       debug:
         msg: "{{ netmask | ipaddr('netmask') }}"
-    - name: use net to convert to cidr notation
+    - name:  Use net to convert to cidr notation
       debug:
         msg: "{{ netmask | ipaddr('net') }}"
 
+    - name:  Host/prefix will filter out only valid host IP addresses and skip net addresses from a list in 1.1.1.1/24
+      debug:
+        msg: "{{ addresses | ipaddr('host/prefix') }}"
+    - name:  Rewrite to IP6
+      debug:
+        msg: "{{ addresses | ipv4('ipv6') }}"
+    - name:  Rewrite to Int
+      debug:
+        msg: "{{ ansible_facts['default_ipv4']['address'] | ipaddr('int') }}"
 
+    - name:  Find usable IP in range
+      debug:
+        msg: "{{ '193.179.99.8/27 | ipaddr('range_usable') }}"
 
