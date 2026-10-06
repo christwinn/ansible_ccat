@@ -36,6 +36,6 @@
       lvol:
         vg: vgfiles
         lv: smallvolume
-        size: "{{ vgsize | int / 3}}g"
+        size: "+100%FREE"
 
 
