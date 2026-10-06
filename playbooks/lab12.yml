@@ -24,11 +24,11 @@
         service:   "{{ item['name'] }}"
         # if state is not set then the default is enabled
         state:     "{{ item['state'] | default('enabled') }}"
-        # omit zone where not set!
-        zone:      "{{ item['zone'] | default('omit') }}"
+        # omit zone where not set! this follows sanders solution but 
+        zone:      "{{ item['zone'] | default(omit) }}"
         immediate: true
         permanent: true
       loop: "{{ firewall }}"
       # only include rules where the zone is defined
-      #when: "item['zone'] is defined"
+      when: "item['zone'] is defined"
 
