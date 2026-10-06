@@ -1,0 +1,24 @@
+---
+- name:  Lists of lists, flatten
+  hosts: localhost
+  gather_facts: no
+  vars:
+    nested_list:
+      - [ 1, 2, 3 ]
+      - [ 4, 5, 6 ]
+      - [ 7, 8, 9 ]
+  tasks: 
+    - name:  Show the original list
+      debug: 
+        msg: "Original nested list: {{ nested_list }}"
+    - name: Flatten list
+      set_fact:
+        flattened_list: "{{ nested_list | flatten }}"
+    - name:  Show the flattened list
+      debug: 
+        msg: "Flattend list: {{ flattened_list }}"
+    - name: Loop then flattened list
+      debug: 
+        msg: "Item: {{ item }}"
+      loop: "{{ flattened_list }}"
+
