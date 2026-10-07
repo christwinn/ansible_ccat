@@ -2,7 +2,7 @@
 - name:  fileglob
   hosts: localhost
   vars:
-    fglist: "{{ query('fileglob', '~/.*') }}"
+    query: "{{ query('fileglob', '~/.*') }}"
     lkup:   "{{ lookup('fileglob', '~/.*') }}"
   tasks:
     - name:  Lookup, just a string
@@ -10,8 +10,8 @@
         msg: "Lookup list: {{ lkup }}"
     - name:  Globbed is a list
       debug: 
-        msg: "Globbed list: {{ fglist }}"
+        msg: "Globbed list: {{ query }}"
     - name:  Loop Globbed List
       debug: 
         msg: "{{ item }}"
-      loop:  "{{ fglist }}"
+      loop:  "{{ query }}"
