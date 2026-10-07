@@ -9,8 +9,8 @@
       copy:
         src:  "{{ item }}"
         dest: "{{ dest }}"
-      # use previously created files
-      loop: "{{ query('fileglob', 'src') }}"
+      # use previously created files, note no '' around src as this would be interpreted as a literal string of 'src'
+      loop: "{{ query('fileglob', src) }}"
     - name: this fails as copy does not support wildcard
       copy:
         src:  "{{ src }}"
