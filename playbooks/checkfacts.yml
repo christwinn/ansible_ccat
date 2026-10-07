@@ -1,0 +1,7 @@
+---
+- name:  check the fact cache valkey is redis
+  hosts: all
+  gather_facts: no
+  tasks:
+    - debug: 
+        var: ansible_facts
