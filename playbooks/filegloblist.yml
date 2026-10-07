@@ -1,0 +1,13 @@
+---
+- name:  fileglob
+  hosts: localhost
+  vars:
+    fglist: "{{ query('fileglob', '~/*') }}"
+  tasks:
+    - name:  Globbed list
+      debug: 
+        msg: "Globbed list: {{ fglist }}"
+    - name:  Loop Globbed List
+      debug: 
+        msg: "{{ item }}"
+      loop:  "{{ fglist }}"
