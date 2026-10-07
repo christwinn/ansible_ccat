@@ -14,5 +14,5 @@
     - name: add authorized keys
       authorized_key:
         user: "{{ item }}"
-        key:  "{{ lookup('file', item + '/id_ed25519.pub') }}"
+        key:  "{{ lookup('file', '/home/' + item + '/id.pub') }}"
       loop: "{{ users }}"
