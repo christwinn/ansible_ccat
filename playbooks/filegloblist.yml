@@ -3,7 +3,7 @@
   hosts: localhost
   vars:
     query: "{{ query('fileglob', '~/.*') }}"
-    lkup:   "{{ lookup('fileglob', '~/.*') }}"
+    lkup:  "{{ lookup('fileglob', '~/.*') }}"
   tasks:
     - name:  Lookup, just a string
       debug: 

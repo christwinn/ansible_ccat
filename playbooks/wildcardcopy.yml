@@ -1,0 +1,9 @@
+---
+- name:  copying with a wildcard. example only use sync in real life
+  hosts: localhost
+  tasks: 
+    - copy:
+        src: "{{ item }}"
+        dest: /tmp
+      # use previously created files
+      loop: "{{ query('fileglob', '~/ansible_ccat/playbooks/webfiles/*') }}"
