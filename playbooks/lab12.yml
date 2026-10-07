@@ -21,11 +21,11 @@
         msg: "Firewall rules {{ firewall }}"
     - name: Loop the rules
       firewalld:
-        service:   "{{ item['name'] }}"
+        service:  "{{ item['name'] }}"
         # if state is not set then the default is enabled
-        state:     "{{ item['state'] | default('enabled') }}"
-        # omit zone where not set! this follows sanders solution but 
-        zone:      "{{ item['zone'] | default(omit) }}"
+        state:    "{{ item['state'] | default('enabled') }}"
+        # omit zone where not set! this follows sanders solution but would argue not what he said :-(
+        zone:     "{{ item['zone'] | default(omit) }}"
         immediate: true
         permanent: true
       loop: "{{ firewall }}"
