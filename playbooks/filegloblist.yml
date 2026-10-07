@@ -2,16 +2,16 @@
 - name:  fileglob
   hosts: localhost
   vars:
-    query: "{{ query('fileglob', '~/.*') }}"
-    lkup:  "{{ lookup('fileglob', '~/.*') }}"
+    qry:  "{{ query('fileglob', '~/.*') }}"
+    lkup: "{{ lookup('fileglob', '~/.*') }}"
   tasks:
     - name:  Lookup, just a string
       debug: 
         msg: "Lookup list: {{ lkup }}"
     - name:  Globbed is a list
       debug: 
-        msg: "Globbed list: {{ query }}"
+        msg: "Globbed list: {{ qry }}"
     - name:  Loop Globbed List
       debug: 
         msg: "{{ item }}"
-      loop:  "{{ query }}"
+      loop:  "{{ qry }}"
