@@ -4,7 +4,7 @@
   ignore_errors: yes
   vars:
     users:
-      - student
+      #      - student
       - ansible
   tasks: 
     - name: create users
