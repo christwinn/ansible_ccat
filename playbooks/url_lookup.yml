@@ -1,0 +1,15 @@
+---
+- name:  install webserver and lookup url
+  hosts: redhat
+  gather_facts: no
+  tasks:
+    - name: install httpd
+      dnf: 
+        name:  {{ item.name }}
+        state: {{ item.state }}
+      loop:
+        - name:  nginx
+          state: absent
+        - name:  httpd
+          state: latest
+
