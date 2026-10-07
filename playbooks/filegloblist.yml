@@ -2,7 +2,7 @@
 - name:  fileglob
   hosts: localhost
   vars:
-    fglist: "{{ query('fileglob', '~/*') }}"
+    fglist: "{{ query('fileglob', '~/.*') }}"
   tasks:
     - name:  Globbed list
       debug: 
