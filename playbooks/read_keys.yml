@@ -1,6 +1,7 @@
 ---
 - name:  read user ssh keys
-  hosts: redhat
+  hosts: localhost
+  ignore_errors: yes
   vars:
     users:
       - student
