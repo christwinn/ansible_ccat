@@ -3,13 +3,39 @@
   hosts: redhat
   gather_facts: no
   tasks:
-    - name: install httpd
+    - name: remove nginx and install httpd
       dnf: 
-        name:  {{ item.name }}
-        state: {{ item.state }}
+        name:  "{{ item['name'] }}"
+        state: "{{ item['state'] }}"
       loop:
         - name:  nginx
           state: absent
         - name:  httpd
           state: latest
+    - name: create index.html
+      copy: 
+        content: "Welcome to this webserver"
+        dest:    /var/www/html/welcome.html
+    - name: start and enable httpd
+      service: 
+        name:    httpd
+        enabled: true
+        state:   started
+    - name: allow http thru the firewall
+      firewalld:
+        service:   "{{ item }}"
+        state:     enabled
+        permanent: yes
+        immediate: yes
+      loop:
+        - http
+        - https
 
+- name:  use url to test for access
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - debug: 
+        msg: node1 says {{ lookup('url', "http://node1/welcome.html") }}
+    - debug: 
+        msg: node2 says {{ lookup('url', "http://node2/welcome.html") }}
