@@ -3,8 +3,12 @@
   hosts: localhost
   vars:
     fglist: "{{ query('fileglob', '~/.*') }}"
+    lkup:   "{{ lookup('fileglob', '~/.*') }}"
   tasks:
-    - name:  Globbed list
+    - name:  Lookup, just a string
+      debug: 
+        msg: "Lookup list: {{ lkup }}"
+    - name:  Globbed is a list
       debug: 
         msg: "Globbed list: {{ fglist }}"
     - name:  Loop Globbed List
