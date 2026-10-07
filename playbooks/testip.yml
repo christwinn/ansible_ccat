@@ -1,0 +1,25 @@
+---
+- name:  Example playbook to filter fixed ip addresses
+  hosts: localhost
+  gather_facts: no
+  vars: 
+    all_addresses:
+      - ip:   "192.168.0.10"
+        type: "fixed"
+      - ip:   "192.168.0.11"
+        type: "dynamic"
+      - ip:   "192.168.0.12"
+        type: "fixed"
+      - ip:   "192.168.0.13"
+        type: "dynamic"
+  tasks: 
+    - name: Filter only fixed ip addresses
+      set_fact: 
+        only_fixed: "{{ all_addresses | selectattr('type', 'equalto', 'fixed') | list }}"
+    - name: Display Fixed IP addresses
+        debug:
+          msg: "Fixed IP's {{ only_fixed }}"
+    - name: Display Fixed IP addresses formatted
+        debug:
+          msg: "Fixed is {{ item.ip }}"
+        loop: "{{ only_fixed }}"
