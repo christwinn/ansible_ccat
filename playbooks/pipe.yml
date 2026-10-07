@@ -1,0 +1,7 @@
+---
+- name:  show pipe plugin
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - debug:
+        msg: "{{ lookup('ansible.builtin.pipe', 'date') }}"
