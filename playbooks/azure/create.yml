@@ -7,11 +7,6 @@
     - ../../sensitive-values
     - azure-vars.yml
   tasks:
-    - name: Get the public key
-      debug:
-        msg: "{{ lookup ('file', ssh_key_file) }}"
-      register: ssh_public_key
-
     - name: Create Azure Resource Group
       azure.azcollection.azure_rm_resourcegroup:
         name:     "{{ rg }}"
@@ -55,7 +50,7 @@
         admin_password: "{{ azure_vm_password }}"
         ssh_public_keys:
           - path: "{{ '/home/' + azure_vm_username + '/.ssh/authorized_keys' }}"
-            key_data: "{{ ssh_public_key }}"
+            key_data: "{{ azure_ssh_publickey }}"
         image:
           offer: almalinux-x86_64
           publisher: almalinux
