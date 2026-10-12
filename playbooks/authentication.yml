@@ -1,0 +1,17 @@
+---
+- name:  lookup secrets and keys
+  hosts: localhost
+  vars_files:
+    - ../../sensitive-values
+  tasks:
+  - name: Get the public key
+    debug:
+      msg: "{{ lookup ('file',ssh_key_file) }}"
+    register: public_key
+  - name: Show public_key
+    debug:
+      msg: "{{ public_key }}"
+  - name: Show username
+    debug:
+      msg: "{{ azure_vm_username }}"
+

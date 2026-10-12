@@ -1,0 +1,16 @@
+---
+- name:  set up sudoers defaults timestamp, requiretty
+  hosts: all 
+  tasks:
+  - name: set defaults in sudoers
+    blockinfile:
+      path:  /etc/sudoers
+      state: present
+      block:  |
+        Defaults !requiretty
+        Defaults timestamp_timeout = 120
+        Defaults timestamp_type = global
+      insertbefore: "#includedir /etc/sudoers.d"
+      validate: /usr/sbin/sudoers -cf %s
+
+

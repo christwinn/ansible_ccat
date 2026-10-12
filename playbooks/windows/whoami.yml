@@ -1,0 +1,13 @@
+---
+- name:  Windows WhoAmI
+  hosts: windows
+  gather_facts: no
+  tasks:
+    - name: WhoAmI
+      ansible.windows.win_whoami:
+      register: whoami
+    - name: Show WhoAmI
+      debug:
+        var: whoami
+
+

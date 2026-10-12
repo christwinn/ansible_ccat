@@ -1,0 +1,9 @@
+---
+- name: Create Windows User
+  hosts: windows
+  tasks:
+    - name: Make User
+      ansible.windows.win_user:
+        name: doris
+
+

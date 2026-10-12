@@ -1,0 +1,6 @@
+rg:       "Ansible"
+location: "westus"
+vn_name:  "ansible_vn"
+vn_ip:    "10.10.0.0/16"
+subnet_name: "subnet10"
+subnet10: "10.10.10.0/24"

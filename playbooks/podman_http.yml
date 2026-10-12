@@ -1,0 +1,74 @@
+---
+- name: Install Podman on redhats
+  hosts: redhat
+  gather_facts: no
+  vars:
+    ports:
+      - "8080"
+      - "8081"
+      - "4444"
+
+  tasks:
+    - name: Hello message
+      debug:
+        msg: "Hello World"
+
+    - name: Install podman to machines
+      ansible.builtin.dnf:
+        name: "{{ item }}"
+        state: latest
+      loop:
+        - "podman"
+        - "git"
+
+    - name: Delete my Pod
+      containers.podman.podman_container:
+        name: "apache-httpd"
+        state: absent
+
+    - name: Clone a git to the web folder
+      ansible.builtin.git:
+        clone: yes
+        dest: /web
+        repo: 'https://github.com/christwinn/www.git'
+        version: main
+
+    - name: Create a Pod
+      containers.podman.podman_container:
+        name: "apache-httpd-{{ item }}"
+        image: docker.io/httpd:latest
+        ports:
+          - "{{ item }}:80"
+        state: started
+        restart_policy: always
+        volume: /web:/usr/local/apache2/htdocs
+      loop:
+        "{{ ports }}"
+
+    - name: Expose Podman Ports
+      ansible.builtin.firewalld:
+        port: "{{ item }}/tcp"
+        state: enabled
+        permanent: true
+        immediate: true
+      loop:
+        "{{ ports }}"
+
+    - name: Processes
+      containers.podman.podman_container_info:
+        #  name: apache-httpd
+      register: pod
+
+    - name: pods
+      debug:
+        msg: "Pod {{ item['Name'] }} is {{ item['State']['Running'] }}"
+      loop: "{{ pod['containers'] }}"
+
+    - name: Run podman ps
+      command: podman ps
+      register: processes
+
+    - name: processes
+      debug:
+        msg: "{{ processes.stdout }}"
+

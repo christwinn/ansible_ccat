@@ -1,0 +1,14 @@
+---
+- name: Deploy a redis container with Podman
+  hosts: localhost
+  tasks:
+  - name: Ensure the Redis container is running
+    containers.podman.podman_container:
+      name: my-redis-cache
+      image: docker.io/redis:alpine
+      state: started
+      ports:
+        - "6380:6379"
+      restart_policy: always
+
+
