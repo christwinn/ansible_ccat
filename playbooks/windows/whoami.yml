@@ -8,6 +8,6 @@
       register: whoami
     - name: Show WhoAmI
       debug:
-        var: whoami
+        var: whoami.stdout
 
 
