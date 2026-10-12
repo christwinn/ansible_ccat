@@ -5,5 +5,9 @@
     - name: Make User
       ansible.windows.win_user:
         name: doris
+        password: "@nsibLe123"
+        state: present
+        groups:
+          - Users
 
 
