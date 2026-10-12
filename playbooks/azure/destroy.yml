@@ -1,6 +1,7 @@
 ---
 - name: Destroys the Resource group with force set
   hosts: localhost
+  become: no
   tasks:
     - name: destroys the Ansible resource group
       azure.azcollection.azure_rm_resourcegroup:
