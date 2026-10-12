@@ -2,6 +2,7 @@
 - name:  Azure
   hosts: localhost
   gather_facts: no
+  become: no
   vars_files: 
     - ../../sensitive-values
     - azure-vars.yml
