@@ -39,7 +39,7 @@
         allocation_method: static
       register: publicip
 
-      - name: Show Public Ip
+    - name: Show Public Ip
       debug:
         msg: "Assigned IP: {{ publicip['state']['ip_address'] }}"
 
