@@ -2,7 +2,8 @@
 - hosts: kvm-control
   tasks: 
     - name: Copy Source VM qcow2 file
-      copy: 
+      copy:
+        remote_src: true 
         src: /var/lib/libvirt/images/template.qcow2
         dest: /var/lib/libvirt/images/{{ item.name }}.qcow2
       loop: "{{ vms }}"
