@@ -11,5 +11,5 @@
       virt: 
         name: "{{ item.name }}"
         command: define
-        xml: "{{ lookup('template', 'vm_template.xml.j2') }}"
+        xml: "{{ lookup('template', 'template.xml.j2') }}"
       loop: "{{ vms }}"
