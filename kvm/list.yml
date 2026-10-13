@@ -1,0 +1,11 @@
+---
+- hosts: kvm-control
+  tasks: 
+    - name: List VM
+      community.libvirt.virt: 
+        command: list_vms
+      register: vms
+    - name: Show VMS
+      debug: 
+      msg: vms
+
