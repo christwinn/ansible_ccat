@@ -7,5 +7,5 @@
       register: vms
     - name: Show VMS
       debug: 
-      msg: vms
+        msg: vms
 
