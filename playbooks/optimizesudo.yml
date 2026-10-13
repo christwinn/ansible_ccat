@@ -11,6 +11,6 @@
         Defaults timestamp_timeout = 120
         Defaults timestamp_type = global
       insertbefore: "#includedir /etc/sudoers.d"
-      validate: /usr/sbin/sudoers -cf %s
+      validate: /usr/sbin/visudo -cf %s
 
 
