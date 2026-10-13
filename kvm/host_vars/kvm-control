@@ -1,0 +1,14 @@
+---
+vms:
+- name: cl9-control1
+  memory: 1024
+  vcpu: 2
+  network: default
+- name: cl9-worker1
+  memory: 512
+  vcpu: 2
+  network: default
+- name: cl9-worker1
+  memory: 512
+  vcpu: 2
+  network: default
